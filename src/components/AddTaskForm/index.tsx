@@ -1,12 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/react";
-import { createStyles } from "../styles/emotion-styles";
 
 import React, { useState } from "react";
-import { TasksStoreImplementation } from "./TasksStore";
+import styles from "./styles";
+import { TasksStoreImplementation } from "../TasksStore";
 import { observer } from "mobx-react";
-import TasksList from "./TasksList";
+import TasksList from "../TasksList";
 import { Button, Grid, TextField } from "@mui/material";
 
 interface AddTaskFormProps {
@@ -52,18 +52,6 @@ const AddTaskForm: React.FC<AddTaskFormProps> = observer(({ tasksStore }) => {
       </Grid>
     </Grid>
   );
-});
-
-const styles = createStyles({
-  inputContainer: {
-    margin: "16px",
-  },
-  input: {
-    marginRight: "8px",
-  },
-  showCompletedButton: {
-    marginTop: "16px",
-  },
 });
 
 export default AddTaskForm;
