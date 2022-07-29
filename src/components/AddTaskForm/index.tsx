@@ -6,8 +6,8 @@ import React, { useState } from "react";
 import styles from "./styles";
 import { TasksStoreImplementation } from "../../store/TasksStore";
 import { observer } from "mobx-react";
-import TasksList from "../TasksList";
 import { Button, Grid, TextField } from "@mui/material";
+import TasksList from "../TasksList";
 
 interface AddTaskFormProps {
   tasksStore: TasksStoreImplementation;
@@ -19,18 +19,16 @@ const AddTaskForm: React.FC<AddTaskFormProps> = observer(({ tasksStore }) => {
   const newTaskIsValid = newTask.length > 0;
   const taskListIsEmpty = tasksStore.tasks.length === 0;
 
-  const addTaskHandler = () => {
-    newTaskIsValid && tasksStore.addTask(newTask);
-  };
+  const handleAddTask = () => newTaskIsValid && tasksStore.addTask(newTask);
+
+  const handleShowCompletedTasks = () => setShowCompletedTasks(!showCompletedTasks);
 
   return (
     <Grid>
       <Button
         css={styles.showCompletedButton}
         variant="outlined"
-        onClick={() => {
-          setShowCompletedTasks(!showCompletedTasks);
-        }}
+        onClick={handleShowCompletedTasks}
       >
         {!showCompletedTasks ? "Mostrar completadas" : "Ocultar completadas"}
       </Button>
@@ -43,7 +41,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = observer(({ tasksStore }) => {
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
           />
-          <Button variant="contained" disabled={!newTaskIsValid} onClick={addTaskHandler}>
+          <Button variant="contained" disabled={!newTaskIsValid} onClick={handleAddTask}>
             Agregar
           </Button>
         </Grid>

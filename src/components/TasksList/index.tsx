@@ -19,19 +19,14 @@ const TasksList: React.FC<TasksListProps> = observer(({ tasksStore, showComplete
   return (
     <Card css={styles.cardContainer}>
       {tasksStore.tasks.map((task, index) => (
-        <div key={index}>
+        <Grid key={index}>
           {(showCompleted && task.completed) || !task.completed ? (
             <Grid
               container
               css={task.completed ? styles.taskItemCompleted : styles.taskItemNotCompleted}
             >
               <Grid item xs={1} css={styles.listContainer}>
-                <Checkbox
-                  onClick={() => {
-                    tasksStore.toggleTask(task.id);
-                  }}
-                  checked={task.completed}
-                />
+                <Checkbox onClick={() => tasksStore.toggleTask(task.id)} checked={task.completed} />
               </Grid>
               <Grid item css={styles.textContainer}>
                 <Typography
@@ -64,7 +59,7 @@ const TasksList: React.FC<TasksListProps> = observer(({ tasksStore, showComplete
               </Button>
             </Grid>
           )}
-        </div>
+        </Grid>
       ))}
     </Card>
   );
