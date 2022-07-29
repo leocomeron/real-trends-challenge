@@ -4,7 +4,7 @@ import { jsx } from "@emotion/react";
 
 import React, { useState } from "react";
 import styles from "./styles";
-import { TasksStoreImplementation } from "../TasksStore";
+import { TasksStoreImplementation } from "../../store/TasksStore";
 import { observer } from "mobx-react";
 import { Button, Card, Checkbox, Grid, TextField, Typography } from "@mui/material";
 
@@ -46,13 +46,15 @@ const TasksList: React.FC<TasksListProps> = observer(({ tasksStore, showComplete
           {task.isEditing && (
             <Grid container>
               <TextField
+                css={styles.input}
                 size="small"
                 placeholder="Editar tarea"
                 value={editedTask}
                 onChange={(e) => setEditedTask(e.target.value)}
               />
               <Button
-                variant="outlined"
+                variant="contained"
+                disabled={editedTask.length === 0}
                 onClick={() => {
                   tasksStore.editTask(task.id, editedTask);
                   setEditedTask("");

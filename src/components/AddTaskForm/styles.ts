@@ -1,4 +1,4 @@
-import { createStyles } from "../../styles/emotion-styles";
+import { createStyles } from "../../emotion-styles";
 
 const styles = createStyles({
   inputContainer: {

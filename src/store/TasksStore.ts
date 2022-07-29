@@ -8,7 +8,7 @@ interface TaskItem {
 }
 
 const saveTasksCookie = (taskArray: TaskItem[]) => {
-  document.cookie = "data" + "=" + JSON.stringify(taskArray);
+  document.cookie = "data=" + JSON.stringify(taskArray);
 };
 
 export class TasksStoreImplementation {
@@ -24,10 +24,7 @@ export class TasksStoreImplementation {
   }
 
   loadTasks() {
-    const cookieValue = document.cookie.replace(
-      /(?:(?:^|.*;\s*)data\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
+    const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)data\s*=\s*([^;]*).*$)|^.*$/, "$1");
     if (cookieValue) {
       this.tasks = JSON.parse(cookieValue);
     }
@@ -56,9 +53,7 @@ export class TasksStoreImplementation {
     const index = this.tasks.findIndex((item) => item.id === id);
     if (index !== -1) {
       this.tasks[index].isEditing = !this.tasks[index].isEditing;
-      this.tasks.map((task) => {
-        task.id !== id && (task.isEditing = false);
-      });
+      this.tasks.map((task) => task.id !== id && (task.isEditing = false));
     }
     saveTasksCookie(this.tasks);
   }

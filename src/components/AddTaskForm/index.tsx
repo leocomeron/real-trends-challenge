@@ -4,7 +4,7 @@ import { jsx } from "@emotion/react";
 
 import React, { useState } from "react";
 import styles from "./styles";
-import { TasksStoreImplementation } from "../TasksStore";
+import { TasksStoreImplementation } from "../../store/TasksStore";
 import { observer } from "mobx-react";
 import TasksList from "../TasksList";
 import { Button, Grid, TextField } from "@mui/material";
@@ -17,6 +17,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = observer(({ tasksStore }) => {
   const [newTask, setNewTask] = useState<string>("");
   const [showCompletedTasks, setShowCompletedTasks] = useState<boolean>(true);
   const newTaskIsValid = newTask.length > 0;
+  const taskListIsEmpty = tasksStore.tasks.length === 0;
 
   const addTaskHandler = () => {
     newTaskIsValid && tasksStore.addTask(newTask);
@@ -48,7 +49,9 @@ const AddTaskForm: React.FC<AddTaskFormProps> = observer(({ tasksStore }) => {
         </Grid>
       </Grid>
       <Grid>
-        <TasksList tasksStore={tasksStore} showCompleted={showCompletedTasks} />
+        {!taskListIsEmpty && (
+          <TasksList tasksStore={tasksStore} showCompleted={showCompletedTasks} />
+        )}
       </Grid>
     </Grid>
   );

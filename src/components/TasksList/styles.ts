@@ -1,4 +1,4 @@
-import { createStyles } from "../../styles/emotion-styles";
+import { createStyles } from "../../emotion-styles";
 
 const styles = createStyles({
   taskItemNotCompleted: {
@@ -21,6 +21,10 @@ const styles = createStyles({
   },
   taskTitle: {
     margin: "auto",
+    cursor: "pointer",
+  },
+  input: {
+    margin: "0px 8px 0px 10px",
   },
 });
 
